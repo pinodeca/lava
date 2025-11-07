@@ -12,7 +12,25 @@ LAVA provides comprehensive analysis of accelerometer data, including:
 
 ## Installation
 
-### From source
+### Using uv (recommended)
+
+This project uses [uv](https://docs.astral.sh/uv/) for fast, reliable dependency management.
+
+```bash
+# Install uv if you haven't already
+pip install uv
+
+# Sync dependencies and create virtual environment
+uv sync
+
+# Run commands in the virtual environment
+uv run python example.py
+
+# Run tests
+uv run pytest tests/
+```
+
+### Using pip (traditional)
 
 ```bash
 pip install -r requirements.txt
@@ -57,6 +75,10 @@ print(f"1-5 Hz band: {results['freq_band_1_5']:.4f} m/s²")
 ### Running the Example
 
 ```bash
+# Using uv (recommended)
+uv run python example.py
+
+# Or using traditional Python
 python example.py
 ```
 
@@ -123,6 +145,10 @@ The frequency band analysis uses Butterworth bandpass filters (4th order) to iso
 Run the unit tests:
 
 ```bash
+# Using uv (recommended)
+uv run pytest tests/ -v
+
+# Or using unittest
 python -m unittest discover tests -v
 ```
 

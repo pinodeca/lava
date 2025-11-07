@@ -9,6 +9,10 @@ import numpy as np
 from scipy import signal
 
 
+# Constant for minimum frequency ratio to avoid filter design issues
+MIN_FREQUENCY_RATIO = 0.001
+
+
 def analyze_accelerometer_data(data, sampling_rate):
     """
     Analyze accelerometer data to extract vibration metrics.
@@ -71,11 +75,11 @@ def analyze_accelerometer_data(data, sampling_rate):
     rms_y = np.sqrt(np.mean(y**2))
     rms_z = np.sqrt(np.mean(z**2))
     
-    # Calculate total acceleration (magnitude)
-    total_acceleration = np.sqrt(x**2 + y**2 + z**2)
+    # Calculate RMS of total acceleration (more efficient than computing magnitude first)
+    rms_total = np.sqrt(np.mean(x**2 + y**2 + z**2))
     
-    # Calculate RMS of total acceleration
-    rms_total = np.sqrt(np.mean(total_acceleration**2))
+    # Calculate total acceleration magnitude for percentile calculation
+    total_acceleration = np.sqrt(x**2 + y**2 + z**2)
     
     # Calculate 90th percentile of peak total acceleration
     percentile_90_peak = np.percentile(total_acceleration, 90)
@@ -123,8 +127,8 @@ def analyze_accelerometer_data(data, sampling_rate):
         
         # Handle the special case of 0 Hz lower bound
         if low == 0:
-            # Use highpass filter for very low frequencies or lowpass for the band
-            low = 0.001 / nyquist  # Small positive value to avoid issues
+            # Use small positive value to avoid issues with filter design
+            low = MIN_FREQUENCY_RATIO / nyquist
         
         # Design Butterworth bandpass filter (4th order)
         try:
@@ -136,7 +140,7 @@ def analyze_accelerometer_data(data, sampling_rate):
             # Calculate RMS of filtered signal
             rms_band = np.sqrt(np.mean(filtered_signal**2))
             results[band_name] = float(rms_band)
-        except Exception:
+        except (ValueError, RuntimeWarning) as e:
             # If filter design fails (e.g., invalid parameters), set to 0
             results[band_name] = 0.0
     

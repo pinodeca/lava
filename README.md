@@ -1,16 +1,21 @@
 # LAVA - Low Amplitude Vibration Analysis
 
-A minimal single-page application for analyzing accelerometer data from Physics Toolbox Suite.
+A comprehensive single-page application for analyzing accelerometer data from Physics Toolbox Suite with multi-metric support and frequency analysis.
 
 ## Features
 
 - **CSV Upload**: Upload Physics Toolbox Suite accelerometer CSV files
 - **Data Parsing**: Automatically extracts metadata (sample rates, start time) and data columns
-- **Z-axis RMS Analysis**: Computes Root Mean Square (RMS) acceleration for the z-axis
-- **Windowed Analysis**: Configure analysis window size in seconds with non-overlapping windows
-- **Interactive Visualization**: Line graph showing RMS(az) over time using Recharts
+- **Multi-Metric Analysis**: 
+  - RMS for X, Y, Z axes and total acceleration
+  - 90th percentile peak total acceleration
+  - RMS in 12 frequency bands (0-1, 1-5, 5-10, 10-20, 20-30, 30-40, 40-50, 50-60, 60-70, 70-80, 80-90, 90-100 Hz)
+- **Windowed Analysis**: Configure window size (seconds) with adjustable overlap (%)
+- **Interactive Visualization**: Multiple Plotly graphs showing selected metrics over time
+- **Horizontal Scrolling**: View configurable number of recent windows with slider navigation
+- **Auto-Scroll**: Option to automatically follow most recent data
 - **Nyquist Warning**: Displays frequency detection limits based on sample rate
-- **Data Limits**: Processes first 1000 rows for optimal performance
+- **Data Limits**: Processes first 20,000 rows for optimal performance
 
 ## Live Demo
 
@@ -56,8 +61,19 @@ npm run preview
    - Start time
    - Number of data points processed
    - Nyquist frequency warning
-4. Adjust the window size (in seconds) to change the RMS calculation granularity
-5. View the Z-axis RMS acceleration graph over time
+4. Configure Analysis Settings:
+   - Adjust window size (in seconds) to change the metric calculation granularity
+   - Set overlap percentage (0-95%) for sliding window analysis
+   - Set max visible windows (default 100) for graph display
+5. Select Metrics to visualize:
+   - Choose from axis RMS, total RMS, 90th percentile, and frequency bands
+   - Multiple metrics can be selected simultaneously
+6. View the visualization:
+   - Each selected metric displays in its own graph
+   - All graphs share the same time axis for easy comparison
+   - Use the scroll slider to navigate through historical data
+   - Click "Snap to Now" to jump to the most recent data
+   - Toggle "Auto-Scroll" to automatically follow new data
 
 ## Sample Data Format
 
@@ -76,12 +92,11 @@ time,ax,ay,az
 
 ## Future Enhancements
 
-- Multi-metric selection (RMS for ax, ay, combined axes)
-- Scrollable/incremental graph for large datasets
-- Frequency domain analysis (FFT)
-- Configurable frequency bands and filters
-- CSV export of processed data
-- Advanced visualization options
+- CSV export of processed metrics
+- Custom frequency band configuration
+- Peak detection and annotation
+- Multi-file comparison
+- Advanced filtering options
 
 ## License
 

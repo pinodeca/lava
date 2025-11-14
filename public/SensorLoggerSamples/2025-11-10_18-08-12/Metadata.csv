@@ -1,0 +1,2 @@
+version,device name,recording epoch time,recording time,recording timezone,platform,appVersion,device id,sensors,sampleRateMs,standardisation
+3,Pixel 7a,1762798092454,2025-11-10_18-08-12,America/Chicago,android,1.48.0,ddb99a75-b0cd-4d89-a6b6-6558dcfcceb1,Accelerometer|Annotation|TotalAcceleration|AccelerometerUncalibrated,0||0|0,false

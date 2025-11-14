@@ -1,0 +1,2 @@
+version,device name,recording epoch time,recording time,recording timezone,platform,appVersion,device id,sensors,sampleRateMs,standardisation
+3,moto g stylus 5G,1763082719043,2025-11-14_01-11-59,America/Chicago,android,1.48.0,f3507582-5ada-4348-a954-177ed5d4c6f0,Accelerometer|Annotation|TotalAcceleration|AccelerometerUncalibrated,0||0|0,false

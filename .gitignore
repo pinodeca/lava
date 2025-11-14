@@ -25,3 +25,5 @@ dist-ssr
 
 # Test files
 test-sensor-logger-parser.js
+test-error-handling.js
+test-integration.mjs

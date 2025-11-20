@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Test files
+test-sensor-logger-parser.js
+test-error-handling.js
+test-integration.mjs
